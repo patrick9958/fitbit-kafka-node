@@ -2,6 +2,11 @@
 import Kafka from 'node-rdkafka';
 import { fitbitType } from '../eventType.js';
 
+async function updateDB(data) {
+	console.log('successfully updated DB');
+	return Promise.resolve(true);
+}
+
 var consumer = new Kafka.KafkaConsumer(
 	{
 		'group.id': 'kafka',
@@ -19,5 +24,7 @@ consumer
 		consumer.consume();
 	})
 	.on('data', function (data) {
-		console.log(`received message: ${fitbitType.fromBuffer(data.value)}`);
+		let serializedData = fitbitType.fromBuffer(data.value);
+		console.log(`received message: ${serializedData}`);
+		updateDB(serializedData);
 	});
