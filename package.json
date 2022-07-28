@@ -7,14 +7,17 @@
 	"scripts": {
 		"start:producer": "node producer/index.js",
 		"start:consumer": "node consumer/index.js",
-    "start:fitbitConsumer": "node consumer/fitbitConsumer.js",
-    "start:fitbitProducer": "node producer/fitbitProducer.js"
+		"start:fitbitConsumer": "node consumer/fitbitConsumer.js",
+		"start:fitbitProducer": "node producer/fitbitProducer.js"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
 		"avsc": "^5.7.4",
-		"node-rdkafka": "^2.13.0"
+		"dotenv": "^16.0.1",
+		"node-fetch": "^3.2.9",
+		"node-rdkafka": "^2.13.0",
+		"set-interval-async": "^2.0.3"
 	},
 	"repository": {
 		"type": "git",
@@ -23,5 +26,8 @@
 	"bugs": {
 		"url": "https://github.com/kriscfoster/node-kafka-producer-consumer/issues"
 	},
-	"homepage": "https://github.com/kriscfoster/node-kafka-producer-consumer#readme"
+	"homepage": "https://github.com/kriscfoster/node-kafka-producer-consumer#readme",
+	"devDependencies": {
+		"@types/set-interval-async": "^1.0.0"
+	}
 }
