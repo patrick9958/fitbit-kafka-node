@@ -1,6 +1,6 @@
 import { Collection, ObjectId } from 'mongodb';
-import { getDB } from './database.service';
-import { User } from '../models/user.model';
+import { getDB } from '../db/db.service.js';
+import { User } from '../models/user.model.js';
 import { config } from '../config.js';
 
 let userCollection;
