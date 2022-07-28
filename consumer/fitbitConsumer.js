@@ -1,6 +1,8 @@
 // TODO: RENAME TO fitbitStepCountConsumer.js and rename in npm scripts package.json
 import Kafka from 'node-rdkafka';
 import { fitbitType } from '../eventType.js';
+// TODO: uncomment and delete local updateDB() when DB is set up
+// import { updateDB } from '../db/updateDB';
 
 async function updateDB(data) {
 	console.log('successfully updated DB');
