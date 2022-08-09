@@ -9,7 +9,8 @@
 		"start:producer": "node producer/index.js",
 		"start:consumer": "node consumer/index.js",
 		"start:fitbitConsumer": "node consumer/fitbitConsumer.js",
-		"start:fitbitProducer": "node producer/fitbitProducer.js"
+		"start:fitbitProducer": "node producer/fitbitProducer.js",
+		"test": "mocha './tests/**/*.js'"
 	},
 	"author": "",
 	"license": "ISC",
@@ -35,6 +36,8 @@
 	},
 	"homepage": "https://github.com/kriscfoster/node-kafka-producer-consumer#readme",
 	"devDependencies": {
-		"@types/set-interval-async": "^1.0.0"
+		"@types/set-interval-async": "^1.0.0",
+		"chai": "^4.3.6",
+		"mocha": "^10.0.0"
 	}
 }

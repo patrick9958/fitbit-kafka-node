@@ -1,7 +1,7 @@
 import { Collection, ObjectId } from 'mongodb';
 import { getDB } from '../db/db.service.js';
 import { User } from '../models/user.model.js';
-import { config } from '../config.js';
+import { config } from '../config/config.js';
 
 let userCollection;
 
@@ -17,6 +17,7 @@ async function getUserCollection() {
 export async function getAllUsers() {
 	let uColl = await getUserCollection();
 	let userDocs = await uColl.find({}).toArray();
+	console.log(userDocs);
 	let users = userDocs.map((userDoc) => User.fromMongoDoc(userDoc));
 	return users; // TODO: turn these into Justin users
 }

@@ -1,7 +1,7 @@
 import Kafka from 'node-rdkafka';
 import { fitbitType } from '../eventType.js';
 import { setIntervalAsync } from 'set-interval-async/dynamic/index.js';
-import { config } from '../config.js';
+import { config } from '../config/config.js';
 import fetch from 'node-fetch';
 
 const stream = Kafka.Producer.createWriteStream(

@@ -2,7 +2,7 @@
 import express from 'express';
 import http from 'http';
 import mongoose from 'mongoose';
-import { config } from './config.js';
+import { config } from './config/config.js';
 import Logging from './lib/Logging.js';
 // TODO: unistall 'passport-oauth2' package
 
@@ -10,7 +10,7 @@ const router = express();
 
 // connect to mongodb
 mongoose
-	.connect(config.mongo.url, { retryWrites: true, w: 'majority' })
+	.connect(config.mongo.url)
 	.then(() => {
 		Logging.info('connected to mongodb!');
 		StartServer();
@@ -54,6 +54,10 @@ const StartServer = () => {
 	});
 
 	/** Routes */
+	router.get('/', (req, res) => {
+		res.send('<h1>Homepage</h1>');
+	});
+
 	// router.use('/users', userRoutes);
 
 	/** Healthcheck */

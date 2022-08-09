@@ -1,8 +1,10 @@
 import * as userService from '../db/user.service.js';
 import { User } from '../models/user.model.js';
 
-let users = await userService.getAllUsers();
+// userService.clearUsers();
 
-for (u in users) {
-	console.log(u.name);
-}
+// let users = await userService.getAllUsers();
+
+// for (let u in users) {
+// 	console.log(u.name);
+// }

@@ -4,7 +4,8 @@ dotenv.config();
 
 const MONGO_USERNAME = process.env.MONGO_USERNAME || '';
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD || '';
-const MONGO_URL = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.zes5n.mongodb.net/`;
+const MONGO_URL = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.zes5n.mongodb.net/?retryWrites=true&w=majority`;
+const MY_DB_NAME = process.env.MY_DB_NAME || '';
 
 const SERVER_PORT = process.env.SERVER_PORT ? Number(process.env.SERVER_PORT) : 2022;
 
@@ -23,7 +24,8 @@ export const config = {
 	mongo: {
 		username: MONGO_USERNAME,
 		password: MONGO_PASSWORD,
-		url: MONGO_URL
+		url: MONGO_URL,
+		dbName: MY_DB_NAME
 	},
 	server: {
 		port: SERVER_PORT
@@ -38,6 +40,7 @@ export const config = {
 	db: {
 		DB_CONN_STRING: DB_CONN_STRING,
 		DB_NAME: DB_NAME,
-		USERS_COLLECTION_NAME: USERS_COLLECTION_NAME
+		USERS_COLLECTION_NAME: USERS_COLLECTION_NAME,
+		CONFIG_COLLECTION_NAME: CONFIG_COLLECTION_NAME
 	}
 };
