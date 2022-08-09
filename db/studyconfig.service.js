@@ -38,13 +38,14 @@ export async function getTriggers() {
 
 	let triggerPaths = [process.env.JUSTIN_CORE_PATH, process.env.JUSTIN_APP_PATH];
 
+	// TODO: make sure trigger objs are in correct format (like ITrigger), maybe use AVRO
 	let triggerObjects = [];
 
 	// instantiate Triggers
 	for (let tName of triggerNames) {
 		// look for each trigger in JUSTIN_CORE_PATH, etc.
 		for (let tPath of triggerPaths) {
-			let tFullPath = tPath + '/src/triggers/' + tName + '.ts';
+			let tFullPath = tPath + '/triggers/' + tName + '.ts';
 			if (await fileExists(tFullPath)) {
 				//console.log("will try to load trigger", tFullPath);
 				triggerObjects.push(await importTrigger(tFullPath));
