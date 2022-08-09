@@ -3,8 +3,9 @@
 	"type": "module",
 	"version": "1.0.0",
 	"description": "Created for [this YouTube tutorial](https://www.youtube.com/watch?v=EiDLKECLcZw).",
-	"main": "index.js",
+	"main": "server.js",
 	"scripts": {
+		"start:server": "node server.js",
 		"start:producer": "node producer/index.js",
 		"start:consumer": "node consumer/index.js",
 		"start:fitbitConsumer": "node consumer/fitbitConsumer.js",
@@ -14,10 +15,15 @@
 	"license": "ISC",
 	"dependencies": {
 		"avsc": "^5.7.4",
+		"chalk": "^4.1.2",
 		"dotenv": "^16.0.1",
+		"express": "^4.18.1",
+		"joi": "^17.6.0",
 		"mongodb": "^4.8.1",
+		"mongoose": "^6.5.1",
 		"node-fetch": "^3.2.9",
 		"node-rdkafka": "^2.13.0",
+		"nodemon": "^2.0.19",
 		"set-interval-async": "^2.0.3"
 	},
 	"repository": {
