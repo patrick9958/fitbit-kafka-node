@@ -1,13 +1,7 @@
 // TODO: RENAME TO fitbitStepCountConsumer.js and rename in npm scripts package.json
 import Kafka from 'node-rdkafka';
-import { fitbitType } from '../eventType.js';
-// TODO: uncomment and delete local updateDB() when DB is set up
-// import { updateDB } from '../db/updateDB';
-
-async function updateDB(data) {
-	console.log('successfully updated DB');
-	return Promise.resolve(true);
-}
+import { fitbitType } from '../../eventType.js';
+import { updateStepsDB } from '../../db/updateState.service.js';
 
 var consumer = new Kafka.KafkaConsumer(
 	{
@@ -28,5 +22,5 @@ consumer
 	.on('data', function (data) {
 		let serializedData = fitbitType.fromBuffer(data.value);
 		console.log(`received message: ${serializedData}`);
-		updateDB(serializedData);
+		updateStepsDB(serializedData);
 	});
