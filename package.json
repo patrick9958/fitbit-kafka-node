@@ -3,9 +3,9 @@
 	"type": "module",
 	"version": "1.0.0",
 	"description": "Created for [this YouTube tutorial](https://www.youtube.com/watch?v=EiDLKECLcZw).",
-	"main": "server.js",
+	"main": "api/server.js",
 	"scripts": {
-		"start:server": "node server.js",
+		"start:server": "node api/server.js",
 		"start:producer": "node producer/index.js",
 		"start:consumer": "node consumer/index.js",
 		"start:fitbitConsumer": "node consumer/fitbitConsumer.js",

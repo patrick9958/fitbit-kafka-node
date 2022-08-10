@@ -2,8 +2,8 @@
 import express from 'express';
 import http from 'http';
 import mongoose from 'mongoose';
-import { config } from './config/config.js';
-import Logging from './lib/Logging.js';
+import { config } from '../config/config.js';
+import Logging from '../lib/Logging.js';
 // TODO: unistall 'passport-oauth2' package
 
 const router = express();
