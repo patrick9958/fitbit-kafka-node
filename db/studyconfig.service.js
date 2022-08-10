@@ -1,7 +1,5 @@
-import { Collection, ObjectId } from 'mongodb';
-import { getDB } from './database.service';
+import { getDB } from './db.service.js';
 import { promises as fs } from 'fs';
-import { ITrigger } from '../models/trigger.interface';
 import { config } from '../config/config.js';
 
 let configCollection;
@@ -36,7 +34,8 @@ export async function getTriggers() {
 		triggerNames = triggerDoc.triggers;
 	}
 
-	let triggerPaths = [process.env.JUSTIN_CORE_PATH, process.env.JUSTIN_APP_PATH];
+	// TODO: change trigger paths to a local path on my computer
+	let triggerPaths = [config.core.JUSTIN_CORE_PATH, config.core.JUSTIN_APP_PATH];
 
 	// TODO: make sure trigger objs are in correct format (like ITrigger), maybe use AVRO
 	let triggerObjects = [];
@@ -45,7 +44,7 @@ export async function getTriggers() {
 	for (let tName of triggerNames) {
 		// look for each trigger in JUSTIN_CORE_PATH, etc.
 		for (let tPath of triggerPaths) {
-			let tFullPath = tPath + '/triggers/' + tName + '.ts';
+			let tFullPath = tPath + '/triggers/' + tName + '.js';
 			if (await fileExists(tFullPath)) {
 				//console.log("will try to load trigger", tFullPath);
 				triggerObjects.push(await importTrigger(tFullPath));

@@ -19,6 +19,9 @@ const FITBIT_ACCESS_TOKEN = process.env.FITBIT_ACCESS_TOKEN || '';
 const DB_CONN_STRING = process.env.DB_CONN_STRING || '';
 const DB_NAME = process.env.DB_NAME || '';
 const USERS_COLLECTION_NAME = process.env.USERS_COLLECTION_NAME || '';
+const JUSTIN_CORE_PATH = process.env.JUSTIN_CORE_PATH || '';
+const JUSTIN_APP_PATH = process.env.JUSTIN_APP_PATH || '';
+const CONFIG_COLLECTION_NAME = process.env.CONFIG_COLLECTION_NAME || '';
 
 export const config = {
 	mongo: {
@@ -42,5 +45,9 @@ export const config = {
 		DB_NAME: DB_NAME,
 		USERS_COLLECTION_NAME: USERS_COLLECTION_NAME,
 		CONFIG_COLLECTION_NAME: CONFIG_COLLECTION_NAME
+	},
+	core: {
+		JUSTIN_CORE_PATH: JUSTIN_CORE_PATH,
+		JUSTIN_APP_PATH: JUSTIN_APP_PATH
 	}
 };
