@@ -22,5 +22,5 @@ consumer
 	.on('data', function (data) {
 		let serializedData = fitbitType.fromBuffer(data.value);
 		console.log(`received message: ${serializedData}`);
-		updateStepsDB(serializedData);
+		updateStepsDB('Patrick Neggie', serializedData.value);
 	});

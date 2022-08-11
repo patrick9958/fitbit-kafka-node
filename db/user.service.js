@@ -5,7 +5,7 @@ import { config } from '../config/config.js';
 
 let userCollection;
 
-async function getUserCollection() {
+export async function getUserCollection() {
 	if (!userCollection) {
 		const db = await getDB();
 		userCollection = db.collection(config.db.USERS_COLLECTION_NAME);
@@ -37,5 +37,11 @@ export async function getUserById(id) {
 	let objId = new ObjectId(id);
 	let userDoc = await uColl.findOne({ _id: objId });
 	// TODO: turn userDoc into a Justin User
+	return User.fromMongoDoc(userDoc);
+}
+
+export async function getUserByName(name) {
+	let uColl = await getUserCollection();
+	let userDoc = await uColl.findOne({ name: name });
 	return User.fromMongoDoc(userDoc);
 }

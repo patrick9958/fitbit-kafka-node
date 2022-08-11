@@ -58,10 +58,15 @@ userState['semanticLocation'] = {
 	updated: new Date()
 };
 
+userState['fitbitSteps'] = {
+	value: 0,
+	updated: new Date()
+};
+
 const testUsers = [
 	new User('Mark Newman', 'mwnewman@umich.edu', '123', studyParams, userPrefs, userState),
 	new User('Pedja Klasnja', 'klasnja@umich.edu', '234'),
-	new User('Patrick Neggie', 'patmn@umich.edu', '345')
+	new User('Patrick Neggie', 'patmn@umich.edu', '345', studyParams, userPrefs, userState)
 ];
 
 export async function loadTestUsers() {
@@ -79,12 +84,12 @@ export async function findUser(userId) {
 	return u;
 }
 
-describe('Users', () => {
-	it('has correct user prefs', async () => {
-		let addedUsers = await loadTestUsers();
-		console.log('length: ' + addedUsers.length);
-		const numUsers = addedUsers.length;
-		console.log('numUsers: ' + numUsers);
-		expect(numUsers.to.equal(2));
-	});
-});
+// describe('Users', () => {
+// 	it('has correct user prefs', async () => {
+// 		let addedUsers = await loadTestUsers();
+// 		console.log('length: ' + addedUsers.length);
+// 		const numUsers = addedUsers.length;
+// 		console.log('numUsers: ' + numUsers);
+// 		expect(numUsers.to.equal(2));
+// 	});
+// });
