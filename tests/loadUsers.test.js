@@ -84,6 +84,8 @@ export async function findUser(userId) {
 	return u;
 }
 
+loadTestUsers();
+
 // describe('Users', () => {
 // 	it('has correct user prefs', async () => {
 // 		let addedUsers = await loadTestUsers();

@@ -14,6 +14,8 @@ const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID || '';
 
 // valid token until August 25th
 const FITBIT_ACCESS_TOKEN = process.env.FITBIT_ACCESS_TOKEN || '';
+const FITBIT_BASIC_TOKEN = process.env.FITBIT_BASIC_TOKEN || '';
+const NEXT_FITBIT_AUTH_URL = process.env.NEXT_FITBIT_AUTH_URL || '';
 
 // MARK'S ENV FILE VARS
 const DB_CONN_STRING = process.env.DB_CONN_STRING || '';
@@ -39,7 +41,9 @@ export const config = {
 		accountSid: TWILIO_ACCOUNT_SID
 	},
 	fitbit: {
-		accessToken: FITBIT_ACCESS_TOKEN
+		basicToken: FITBIT_BASIC_TOKEN,
+		accessToken: FITBIT_ACCESS_TOKEN,
+		nextFitbitAuthUrl: NEXT_FITBIT_AUTH_URL
 	},
 	db: {
 		DB_CONN_STRING: DB_CONN_STRING,

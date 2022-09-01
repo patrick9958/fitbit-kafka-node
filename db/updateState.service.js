@@ -35,3 +35,74 @@ export async function updateStepsDB(name, stepCount) {
 	console.log('successfully updated DB');
 	return Promise.resolve(true);
 }
+
+export async function updateAllFitbitTokens(name, fitbitID, accessToken, refreshToken) {
+	let uColl = await getUserCollection();
+	uColl.updateOne(
+		{
+			name: name
+		},
+		{
+			$set: {
+				'state.refreshToken': {
+					refreshToken: refreshToken,
+					updated: new Date()
+				},
+				'state.accessToken': {
+					accessToken: accessToken,
+					updated: new Date()
+				},
+				'state.fitbitID': {
+					fitbitID: fitbitID,
+					updated: new Date()
+				}
+			}
+		}
+	);
+	console.log(
+		`successfully updated all Fitbit tokens:\nREFRESH_TOKEN: ${refreshToken}\nACCESS_TOKEN: ${accessToken}\nFITBIT_USER_ID: ${fitbitID}`
+	);
+	return Promise.resolve(true);
+}
+
+export async function updateFitbitRefreshToken(name, fitbitID, refreshToken) {
+	console.log('new StepCount: ', stepCount);
+	// let user = getUserByName(name);
+	let uColl = await getUserCollection();
+	uColl.updateOne(
+		{
+			name: name
+		},
+		{
+			$set: {
+				'state.refreshToken': {
+					refreshToken: refreshToken,
+					updated: new Date()
+				}
+			}
+		}
+	);
+	console.log('successfully updated DB');
+	return Promise.resolve(true);
+}
+
+export async function updateFitbitAccessToken(name, fitbitID, refreshToken) {
+	console.log('new StepCount: ', stepCount);
+	// let user = getUserByName(name);
+	let uColl = await getUserCollection();
+	uColl.updateOne(
+		{
+			name: name
+		},
+		{
+			$set: {
+				'state.accessToken': {
+					accessToken: accessToken,
+					updated: new Date()
+				}
+			}
+		}
+	);
+	console.log('successfully updated DB');
+	return Promise.resolve(true);
+}
