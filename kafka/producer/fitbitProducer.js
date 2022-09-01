@@ -4,6 +4,9 @@ import { setIntervalAsync } from 'set-interval-async/dynamic/index.js';
 import { config } from '../../config/config.js';
 import fetch from 'node-fetch';
 
+// TODO: figure out why when I start consumer first, sometimes produced msgs aren't consumed in shell
+// TODO: figure out why when I start produced first, sometimes consumed msgs aren't shown in shell
+// https://stackoverflow.com/questions/58928487/kafka-consumer-not-consuming-from-beginning
 const stream = Kafka.Producer.createWriteStream(
 	{
 		'metadata.broker.list': 'localhost:9092'
@@ -44,6 +47,7 @@ async function sendStepCount(date = null) {
 		})
 			.then((res) => res.json())
 			.then((jsonRes) => {
+				// TODO: add try catch, print error if jsonRes['activities-steps'] is undefined
 				let stepCount = jsonRes['activities-steps'][0].value.toString();
 				// console.log(stepCount);
 				queueStepCountMessage(stepCount);

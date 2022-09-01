@@ -20,6 +20,7 @@ const router = express();
 
 // TODO: connect to DB
 const users = [];
+
 initializePassport(
 	passport,
 	(email) => users.find((user) => user.email === email),
@@ -176,11 +177,11 @@ const StartServer = () => {
 	});
 
 	router.get('/fitbit/success', (req, res) => {
-		console.log('params: ' + JSON.stringify(req.params));
-		console.log('query: ' + JSON.stringify(req.query));
-		console.log('query code: ' + req.query.code);
+		// console.log('params: ' + JSON.stringify(req.params));
+		// console.log('query: ' + JSON.stringify(req.query));
+		// console.log('query code: ' + req.query.code);
 		FitbitHelper.updateFitbitUserCredentials(req.query.code);
-		res.status(201).send(`<h1>${req.query.code}</h1>`);
+		res.status(201).redirect('/');
 	});
 	// router.use('/users', userRoutes);
 
