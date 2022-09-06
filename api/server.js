@@ -14,6 +14,7 @@ import Logging from '../lib/Logging.js';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import { getUserByEmail, getUserById } from '../db/user.service.js';
 // TODO: unistall 'passport-oauth2' package
 
 const router = express();
@@ -23,8 +24,8 @@ const users = [];
 
 initializePassport(
 	passport,
-	(email) => users.find((user) => user.email === email),
-	(id) => users.find((user) => user.id === id)
+	(email) => getUserByEmail(email),
+	(id) => getUserById(id)
 );
 
 // connect to mongodb
@@ -126,8 +127,6 @@ const StartServer = () => {
 		} catch {
 			res.redirect('/register');
 		}
-
-		console.log('users: ', users);
 	});
 
 	router.delete('/logout', (req, res, next) => {
@@ -152,27 +151,10 @@ const StartServer = () => {
 		}
 		next();
 	}
-	// const users = [];
-	// router.get('/users', (req, res) => {
-	// 	res.json(users);
-	// });
-
-	// router.post('/users', async (req, res) => {
-	// 	try {
-	// 		const hashedPass = await bcrypt.hash(req.body.password, 10);
-	// 		console.log('hashed pass: ', hashedPass);
-	// 		const user = { name: req.body.name, password: hashedPass };
-	// 		users.push(user);
-	// 		res.status(201).send();
-	// 	} catch {
-	// 		res.status(500).send();
-	// 	}
-	// });
 
 	const authLink =
 		'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=238H5F&redirect_uri=http%3A%2F%2Flocalhost%3A9090%2Ffitbit%2Fsuccess&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight%20oxygen_saturation%20respiratory_rate%20temperature&expires_in=604800';
 	router.get('/fitbit/auth', (req, res) => {
-		// res.send(`<a href="${authLink}">Authenticate with fitbit</a>`);
 		res.redirect(authLink);
 	});
 

@@ -85,6 +85,8 @@ export async function findUser(userId) {
 }
 
 loadTestUsers();
+console.log('done adding users');
+process.exit(0);
 
 // describe('Users', () => {
 // 	it('has correct user prefs', async () => {

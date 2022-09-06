@@ -40,6 +40,12 @@ export async function getUserById(id) {
 	return User.fromMongoDoc(userDoc);
 }
 
+export async function getUserByEmail(email) {
+	let uColl = await getUserCollection();
+	let userDoc = await uColl.findOne({ email: email });
+	return User.fromMongoDoc(userDoc);
+}
+
 export async function getUserByName(name) {
 	let uColl = await getUserCollection();
 	let userDoc = await uColl.findOne({ name: name });

@@ -3,15 +3,17 @@ import { isNull } from 'util';
 
 export class User {
 	// private email: string;
+	// private password: string;
 	// private name: string;
 	// private id: string;
 	// private studyParams: Object | undefined;
 	// private prefs: Object | undefined;
 	// private state: Object | undefined;
 
-	constructor(name, email, id, params, prefs, state) {
+	constructor(name, email, password, id, params, prefs, state) {
 		this.name = name;
 		this.email = email;
+		this.password = password;
 		this.studyParams = params;
 		this.id = id;
 		this.prefs = prefs;
@@ -24,6 +26,7 @@ export class User {
 		let id = mongoDoc['_id'].toString();
 		return new User(
 			mongoDoc['email'],
+			mongoDoc['password'],
 			mongoDoc['name'],
 			id,
 			mongoDoc['studyParams'],

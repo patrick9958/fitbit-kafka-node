@@ -10,6 +10,7 @@
 		"start:fitbitConsumer": "node kafka/consumer/fitbitConsumer.js",
 		"start:fitbitProducer": "node kafka/producer/fitbitProducer.js",
 		"test": "mocha './tests/**/*.js'",
+		"reloadUsers": "node tests/loadUsers.test.js",
 		"dev": "nodemon api/server.js"
 	},
 	"author": "",
