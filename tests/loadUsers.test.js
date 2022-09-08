@@ -74,7 +74,8 @@ export async function loadTestUsers() {
 	await clearUsers();
 
 	for (let tu of testUsers) {
-		await addUser(tu);
+		let res = await addUser(tu);
+		console.log(res);
 	}
 	return testUsers;
 }
@@ -84,7 +85,8 @@ export async function findUser(userId) {
 	return u;
 }
 
-loadTestUsers();
+const users = await loadTestUsers();
+console.log(users);
 console.log('done adding users');
 process.exit(0);
 
