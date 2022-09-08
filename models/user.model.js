@@ -20,6 +20,8 @@ export class User {
 		this.state = state;
 	}
 
+	// TODO: FIX OR DELETE FUNCTION
+	// BUG: matches incorrect key to value in doc
 	static fromMongoDoc(mongoDoc) {
 		if (mongoDoc === null) return null;
 

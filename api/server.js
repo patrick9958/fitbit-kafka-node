@@ -14,13 +14,17 @@ import Logging from '../lib/Logging.js';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import { getUserByEmail, getUserById } from '../db/user.service.js';
+import {
+	getUserByEmail,
+	getUserById,
+	addUser,
+	createNewUser
+} from '../db/user.service.js';
 // TODO: unistall 'passport-oauth2' package
 
 const router = express();
 
 // TODO: connect to DB
-const users = [];
 
 initializePassport(
 	passport,
@@ -45,7 +49,9 @@ const StartServer = () => {
 	/** Log the request */
 	router.use((req, res, next) => {
 		/** Log the req */
-		Logging.info(`Incoming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
+		Logging.info(
+			`Incoming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`
+		);
 
 		res.on('finish', () => {
 			/** Log the res */
@@ -63,8 +69,8 @@ const StartServer = () => {
 	router.use(
 		session({
 			secret: config.server.SESSION_SECRET,
-			resave: false,
-			saveUninitialized: false
+			resave: true,
+			saveUninitialized: true
 		})
 	);
 	router.use(passport.initialize());
@@ -74,10 +80,16 @@ const StartServer = () => {
 	/** Rules of our API */
 	router.use((req, res, next) => {
 		res.header('Access-Control-Allow-Origin', '*');
-		res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+		res.header(
+			'Access-Control-Allow-Headers',
+			'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+		);
 
 		if (req.method == 'OPTIONS') {
-			res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+			res.header(
+				'Access-Control-Allow-Methods',
+				'PUT, POST, PATCH, DELETE, GET'
+			);
 			return res.status(200).json({});
 		}
 
@@ -116,12 +128,11 @@ const StartServer = () => {
 	router.post('/register', checkNotAuthenticated, async (req, res) => {
 		try {
 			const hashedPass = await bcrypt.hash(req.body.password, 10);
-			users.push({
-				// TODO: replace id field with _id from MongoDB
-				id: Date.now().toString(),
-				name: req.body.name,
-				email: req.body.email,
-				password: hashedPass
+			await addUser(
+				createNewUser(req.body.name, req.body.email, hashedPass)
+			).catch((error) => {
+				Logging.error('ERROR: registering new user failed');
+				Logging.error(`${error.name}: ${error.message}`);
 			});
 			res.redirect('/login');
 		} catch {
@@ -168,7 +179,9 @@ const StartServer = () => {
 	// router.use('/users', userRoutes);
 
 	/** Healthcheck */
-	router.get('/ping', (req, res, next) => res.status(200).json({ message: 'pong' }));
+	router.get('/ping', (req, res, next) =>
+		res.status(200).json({ message: 'pong' })
+	);
 
 	/** Error handling */
 	router.use((req, res, next) => {
