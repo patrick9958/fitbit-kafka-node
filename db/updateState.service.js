@@ -36,11 +36,16 @@ export async function updateStepsDB(name, stepCount) {
 	return Promise.resolve(true);
 }
 
-export async function updateAllFitbitTokens(name, fitbitID, accessToken, refreshToken) {
+export async function updateAllFitbitTokens(
+	id,
+	fitbitID,
+	accessToken,
+	refreshToken
+) {
 	let uColl = await getUserCollection();
 	uColl.updateOne(
 		{
-			name: name
+			_id: id
 		},
 		{
 			$set: {

@@ -170,10 +170,12 @@ const StartServer = () => {
 	});
 
 	router.get('/fitbit/success', (req, res) => {
-		// console.log('params: ' + JSON.stringify(req.params));
-		// console.log('query: ' + JSON.stringify(req.query));
-		// console.log('query code: ' + req.query.code);
-		FitbitHelper.updateFitbitUserCredentials(req.query.code);
+		console.log('params: ' + JSON.stringify(req.params));
+		console.log('query: ' + JSON.stringify(req.query));
+		console.log('req.user: ' + JSON.stringify(req.user));
+		console.log('req.user.name: ' + req.user.name);
+		console.log('req.user._id type: ' + typeof req.user._id);
+		FitbitHelper.updateFitbitUserCredentials(req.user._id, req.query.code);
 		res.status(201).redirect('/');
 	});
 	// router.use('/users', userRoutes);
